@@ -1,0 +1,30 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_git
+    DATASOURCENAME=csv_datasource
+    SCHEMANAME = '${databases.cvs_training.views.jdbc.bv_git.SCHEMANAME}'
+    RELATIONNAME='BC1' 
+    OUTPUTSCHEMA (
+        int = 'INT' :'java.math.BigDecimal' (OPT) (sourcetyperadix='10', sourcetypename='NUMBER', sourcetypeid='3')  ESCAPE SORTABLE,
+        name = 'NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypesize='20')  SORTABLE,
+        job_id = 'JOB_ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypesize='20')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_git I18N au_cst (
+        int:decimal (sourcetyperadix = '10', sourcetypeid = '3'), 
+        name:text (sourcetyperadix = '10', sourcetypesize = '20', sourcetypeid = '12'), 
+        job_id:text (sourcetyperadix = '10', sourcetypesize = '20', sourcetypeid = '12')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_git(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD int (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD job_id (any) OPT ANY
+        )
+        OUTPUTLIST (int, job_id, name
+        )
+        WRAPPER (jdbc bv_git)
+    );
+

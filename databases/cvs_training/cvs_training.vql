@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE cvs_training '';
+
+ALTER DATABASE cvs_training
+  CHARSET DEFAULT;
+
