@@ -6,6 +6,11 @@
         name = 'NAME' :'java.lang.String' (sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='20')  SORTABLE NOT UPDATEABLE,
         job_id = 'JOB_ID' :'java.lang.String' (sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='20')  SORTABLE NOT UPDATEABLE,
         id = 'ID' :'java.lang.String' (OBL) (DEFAULTVALUE='669')  EXTERN SORTABLE
+    )
+    SOURCECONFIGURATION (
+        delegatesqlsentenceassubquery = false,
+        supportsdistributedtransactions = false,
+        datainorderfieldslist = ()
     );
 
 CREATE OR REPLACE TABLE bv_vcs I18N au_cst (
@@ -15,6 +20,7 @@ CREATE OR REPLACE TABLE bv_vcs I18N au_cst (
         id:text (defaultvalue = '669')
     )
     CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_vcs(
         I18N au_cst
