@@ -1,0 +1,31 @@
+﻿CREATE OR REPLACE WRAPPER JDBC bv_new_x
+    DATASOURCENAME=csv_datasource
+    SQLSENTENCE='select * from bc1 where job_id=@{{jid}}'   
+    OUTPUTSCHEMA (
+        int = 'INT' :'java.lang.Integer' (sourcetypename='NUMBER', sourcetypeid='2')  ESCAPE SORTABLE NOT UPDATEABLE,
+        name = 'NAME' :'java.lang.String' (sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='20')  SORTABLE NOT UPDATEABLE,
+        job_id = 'JOB_ID' :'java.lang.String' (sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='20')  SORTABLE NOT UPDATEABLE,
+        jid = 'JID' :'java.lang.String' (OBL) (DEFAULTVALUE='669')  EXTERN SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_new_x I18N au_cst (
+        int:int (sourcetypeid = '3'), 
+        name:text (sourcetypedecimals = '0', sourcetypesize = '20', sourcetypeid = '12'), 
+        job_id:text (sourcetypedecimals = '0', sourcetypesize = '20', sourcetypeid = '12'), 
+        jid:text (defaultvalue = '669')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_new_x(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD int NOS ZERO ()
+             ADD name NOS ZERO ()
+             ADD job_id NOS ZERO ()
+             ADD jid (=) OBL ONE
+        )
+        OUTPUTLIST (int, job_id, name
+        )
+        WRAPPER (jdbc bv_new_x)
+    );
+
