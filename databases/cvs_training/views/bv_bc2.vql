@@ -10,7 +10,7 @@ CREATE OR REPLACE WRAPPER JDBC bc2
 
 CREATE OR REPLACE TABLE bv_bc2 I18N au_cst (
         num:decimal (sourcetyperadix = '10', sourcetypeid = '3'), 
-        dept:text (sourcetyperadix = '10', sourcetypesize = '20', sourcetypeid = '12')
+        dept:text (sourcetyperadix = '10', sourcetypesize = '20', sourcetypeid = '-9')
     )
     CACHE OFF
     TIMETOLIVEINCACHE DEFAULT
