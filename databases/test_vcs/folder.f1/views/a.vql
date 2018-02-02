@@ -1,0 +1,29 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC a
+    FOLDER = '/f1'
+    DATASOURCENAME=ds_d1
+    SCHEMANAME = '${databases.test_vcs.folder.f1.views.jdbc.a.SCHEMANAME}'
+    RELATIONNAME='A' 
+    OUTPUTSCHEMA (
+        a1 = 'A1' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypesize='20')  SORTABLE,
+        a2 = 'A2' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR2', sourcetypeid='12', sourcetypesize='20')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE a I18N us_ist (
+        a1:text (sourcetyperadix = '10', sourcetypesize = '20', sourcetypeid = '12'), 
+        a2:text (sourcetyperadix = '10', sourcetypesize = '20', sourcetypeid = '12')
+    )
+    FOLDER = '/f1'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD a(
+        I18N us_ist
+        CONSTRAINTS (
+             ADD a1 (any) OPT ANY
+             ADD a2 (any) OPT ANY
+        )
+        OUTPUTLIST (a1, a2
+        )
+        WRAPPER (jdbc a)
+    );
+

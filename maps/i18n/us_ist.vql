@@ -1,0 +1,11 @@
+﻿CREATE OR REPLACE MAP i18n us_ist (
+    'country' = 'US'
+    'datepattern' = 'MMM d, yyyy h:mm:ss a'
+    'doubledecimalposition' = '3'
+    'doubledecimalseparator' = ''
+    'doublegroupseparator' = ''
+    'language' = 'en'
+    'timepattern' = 'DAY'
+    'timezone' = 'PST'
+);
+
